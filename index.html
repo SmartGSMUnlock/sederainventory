@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sales Inventory (Client PANEL)</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Client Panel - Sales Inventory</h1>
+    <div class="header-buttons">
+      <button class="darkmode-toggle" onclick="toggleDarkMode()">🌙</button>
+      <button class="login-btn" onclick="openLogin()">Login</button>
+      <!-- ✅ Login Popup Modal -->
+      <div id="loginModal" class="login-modal hidden">
+      <div class="login-box">
+      <span class="close-btn" onclick="closeLogin()">&times;</span>
+      <h2>Admin Login</h2>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+  </div>
+</div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Sales Section -->
+    <div class="sales-section">
+      <form id="salesForm">
+        <label>Item Type
+          <select id="itemType" required>
+            <option value="">Select Item</option>
+            <option value="Charger">Charger</option>
+            <option value="Headset">Headset</option>
+            <option value="Wireless Headset">Wireless Headset</option>
+            <option value="Chord">Chord</option>
+            <option value="Tempered Glass">Tempered Glass</option>
+            <option value="Privacy Tempered">Privacy Tempered</option>
+            <option value="Full Tempered">Full Tempered</option>
+            <option value="Mini Fan">Mini Fan</option>
+            <option value="Case">Case</option>
+          </select>
+        </label>
+
+        <label id="chargerTypeContainer" class="hidden">
+          Charger Type
+          <select id="chargerType">
+            <option value="Micro">Micro</option>
+            <option value="iOS">iOS</option>
+            <option value="Type-C">Type-C</option>
+          </select>
+        </label>
+
+        <label id="modelContainer" class="hidden">
+          Model
+          <input type="text" id="model" placeholder="Enter model"/>
+        </label>
+
+        <label>Quantity
+          <input type="number" id="quantity" min="1" required/>
+        </label>
+        <label>Unit Price (₱)
+          <input type="number" id="price" min="1" required/>
+        </label>
+        <label>Capital per Item (₱)
+          <input type="number" id="capital" min="0" required/>
+        </label>
+        <button type="submit">Add Sale</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Item Type</th>
+            <th>Model</th>
+            <th>Charger Type</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Capital</th>
+            <th>Total</th>
+            <th>Profit</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="salesBody"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7">Grand Total Sales</td>
+            <td id="grandTotal">₱0</td>
+            <td id="overallProfit">₱0</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Expenses Section -->
+    <aside class="expenses-section">
+      <h2>Expenses</h2>
+      <form id="expenseForm">
+        <label>Expense Name
+          <input type="text" id="expenseName" required/>
+        </label>
+        <label>Amount (₱)
+          <input type="number" id="expenseAmount" min="1" required/>
+        </label>
+        <button type="submit">Add Expense</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Expense</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="expenseBody"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">Total Expenses</td>
+            <td id="totalExpenses">₱0</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <h3>Overview</h3>
+      <canvas id="overviewChart"></canvas>
+    </aside>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
